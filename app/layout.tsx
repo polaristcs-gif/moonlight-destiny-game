@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { ToastContainer } from "@/components/toast"
 import { OfflineDetector } from "@/components/offline-detector"
-import "./globals.css"
+import "./globals_НОВЫЙ_ОРИГИНАЛЬНЫЙ.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -83,7 +83,7 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={`${_geist.className} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <ErrorBoundary>
           <OfflineDetector />
           {children}
