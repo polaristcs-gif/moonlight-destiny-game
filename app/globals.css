@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Принудительная перекомпиляция */
+.force-recompile-fix {}
+
+@layer base {
+  /* Чистый CSS без переменных */
+  * {
+    border-style: solid;
+    border-width: 0;
+    border-color: #332D3F;
+  }
+
+  body {
+    background-color: #0A0514;
+    color: #F8F8F8;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  /* Утилиты для border-border */
+  .border-border { border-color: #332D3F !important; }
+  .border-input { border-color: #332D3F !important; }
+  .border-ring { border-color: #8D77C7 !important; }
+  .border-primary { border-color: #8D77C7 !important; }
+  .border-secondary { border-color: #332D3F !important; }
+  .border-accent { border-color: #8D77C7 !important; }
+}
+
+/* ВСЕ ВАШИ АНИМАЦИИ ЗДЕСЬ... */
+.moon-symbol,
+.star-symbol {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 0 30px rgba(139, 92, 246, 1)) drop-shadow(0 0 15px rgba(236, 72, 153, 0.8))
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+  animation: symbol-breathe 2s ease-in-out infinite;
+}
+
+@keyframes symbol-breathe {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 1)) drop-shadow(0 0 15px rgba(236, 72, 153, 0.8))
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 40px rgba(139, 92, 246, 1)) drop-shadow(0 0 20px rgba(236, 72, 153, 1))
+      drop-shadow(0 0 12px rgba(255, 255, 255, 1));
+  }
+}
+
+/* Остальные анимации как у вас... */

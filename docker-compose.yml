@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=8352828151:AAF-LMBxlvy1N3sBcY_qhm-D386g5WuqYzQ
+    container_name: moonlight-destiny-bot
