@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { GameBoard } from "@/components/game-board"
@@ -18,22 +18,18 @@ export default function MoonlightDestiny() {
   const [winCode, setWinCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [showStats, setShowStats] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const [stars, setStars] = useState<Array<{id: number, size: number, top: number, left: number, opacity: number}>>([])
 
-  // Генерируем звёзды только на клиенте - статичные для производительности
-  const stars = useMemo(() => {
-    if (typeof window === 'undefined') return []
-    return [...Array(25)].map((_, i) => ({
+  // Генерируем звёзды только на клиенте
+  useEffect(() => {
+    const generatedStars = [...Array(25)].map((_, i) => ({
       id: i,
       size: Math.random() * 2 + 0.5,
       top: Math.random() * 100,
       left: Math.random() * 100,
       opacity: Math.random() * 0.5 + 0.3
     }))
-  }, [mounted])
-
-  useEffect(() => {
-    setMounted(true)
+    setStars(generatedStars)
   }, [])
 
   // --- НАСТРОЙКИ ТЕЛЕГРАМА ---
@@ -159,8 +155,8 @@ export default function MoonlightDestiny() {
         }} />
       </div>
 
-      {/* ЗВЕЗДЫ - статичные для производительности на мобильных */}
-      {mounted && (
+      {/* ЗВЕЗДЫ - статичные для производительности */}
+      {stars.length > 0 && (
         <div className="absolute inset-0 z-0 pointer-events-none">
           {stars.map((star) => (
             <div
