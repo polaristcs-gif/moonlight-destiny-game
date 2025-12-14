@@ -132,46 +132,53 @@ export function GameBoard({ onWin, onLose, onDraw }: GameBoardProps) {
               key={index}
               onClick={() => handleCellClick(index)}
               disabled={!isPlayerTurn || cell !== null || gameFinished}
-              initial={{ scale: 0, opacity: 0 }}
+              initial={{ scale: 0, opacity: 0, rotateY: 180 }}
               animate={{
                 scale: 1,
                 opacity: 1,
+                rotateY: 0,
                 boxShadow: isWinningCell
                   ? [
                       "0 0 0px rgba(139, 92, 246, 0)",
-                      "0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(168, 85, 247, 0.6)",
+                      "0 0 25px rgba(255, 255, 255, 0.9), 0 0 50px rgba(168, 85, 247, 0.7)",
                       "0 0 0px rgba(139, 92, 246, 0)",
                     ]
                   : "0 0 0px rgba(0, 0, 0, 0)",
               }}
               transition={{
-                delay: index * 0.05,
+                delay: index * 0.08,
+                rotateY: { duration: 0.5, ease: "easeOut" },
                 boxShadow: { duration: 1.5, repeat: isWinningCell ? Number.POSITIVE_INFINITY : 0 },
               }}
-              whileHover={!cell && isPlayerTurn ? { scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" } : {}}
-              whileTap={{ scale: 0.95 }}
-              className={`aspect-square holographic-glass rounded-xl flex items-center justify-center transition-all duration-300 ${
-                isWinningCell ? "bg-white/20 border-white/50" : "hover:bg-white/5"
+              whileHover={!cell && isPlayerTurn ? { scale: 1.08, backgroundColor: "rgba(168,85,247,0.15)", borderColor: "rgba(168,85,247,0.5)" } : {}}
+              whileTap={{ scale: 0.92 }}
+              style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
+              className={`aspect-square rounded-xl flex items-center justify-center transition-all duration-300 border-2 ${
+                isWinningCell 
+                  ? "bg-purple-500/30 border-purple-300/70" 
+                  : cell 
+                    ? "bg-black/30 border-purple-500/30" 
+                    : "bg-black/20 border-purple-500/20 hover:border-purple-400/50"
               }`}
             >
               {cell === "moon" && (
                 <motion.div
-                  initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
+                  initial={{ opacity: 0, rotateY: -180, scale: 0.3 }}
+                  animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 150, damping: 15 }}
+                  style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* ЯВНО ЗАДАЕМ ЦВЕТ И РАЗМЕР ИКОНКИ */}
-                  <Moon className="w-8 h-8 md:w-10 md:h-10 text-purple-200 fill-purple-200/20 drop-shadow-[0_0_8px_rgba(216,180,254,0.8)]" />
+                  <Moon className="w-10 h-10 md:w-12 md:h-12 text-purple-200 fill-purple-300/30 drop-shadow-[0_0_15px_rgba(216,180,254,0.9)]" />
                 </motion.div>
               )}
               {cell === "star" && (
                 <motion.div
-                  initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
+                  initial={{ opacity: 0, rotateY: 180, scale: 0.3 }}
+                  animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 150, damping: 15 }}
+                  style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* ИКОНКА ИИ - БЕЛАЯ/ЗОЛОТАЯ С ГЛОУ */}
-                  <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-yellow-100 fill-yellow-100/20 drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]" />
+                  <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-yellow-200 fill-yellow-200/30 drop-shadow-[0_0_15px_rgba(255,237,74,0.9)]" />
                 </motion.div>
               )}
             </motion.button>

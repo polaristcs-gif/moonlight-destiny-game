@@ -2,57 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.force-recompile-fix {}
-
 @layer base {
-  /* --- ПРЯМЫЕ ЦВЕТА (БЕЗ ПЕРЕМЕННЫХ) --- */
-  :root {
-    /* Удалены все переменные, чтобы не ломать сборку.
-       Вместо этого мы используем прямые HEX-значения для бэкграунда и текста.
-       Если Tailwind-класс не найдет CSS-переменную, он использует CSS из body. */
-  }
-
-  /* --- ЧИСТЫЙ CSS ДЛЯ СБРОСА (УБИВАЕТ BORDER-BORDER И BORDER-COLOR) --- */
   * {
-    border-style: solid;
-    border-width: 0;
-    /* Устанавливаем цвет рамки, используя HEX вашего старого --border */
-    border-color: #332D3F; 
+    @apply border-border;
   }
 
   body {
-    background-color: #0A0514; /* 268 75% 5% */
-    color: #F8F8F8; /* 0 0% 98% */
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background text-foreground;
   }
-}
-
-/* --- ГАРАНТИРОВАННЫЕ UTILITIES (Чтобы вернуть цвета для UI-компонентов) --- */
-@layer utilities {
-  /* Ваши оригинальные цвета (HEX-эквиваленты):
-     #332D3F - Темно-фиолетовый (Border/Input/Secondary)
-     #8D77C7 - Фиолетовый (Primary/Ring/Accent)
-  */
-  
-  /* Цвета рамок */
-  .border-border { border-color: #332D3F !important; } 
-  .border-input { border-color: #332D3F !important; } 
-  .border-ring { border-color: #8D77C7 !important; } 
-  .border-primary { border-color: #8D77C7 !important; } 
-  .border-secondary { border-color: #332D3F !important; } 
-  .border-accent { border-color: #8D77C7 !important; } 
-
-  /* Цвета фона/текста */
-  .bg-primary { background-color: #8D77C7 !important; }
-  .bg-secondary { background-color: #332D3F !important; }
-  .bg-background { background-color: #0A0514 !important; }
-  .bg-card { background-color: #0A0514 !important; }
-  .bg-popover { background-color: #0A0514 !important; }
-  .bg-accent { background-color: #8D77C7 !important; }
-  
-  .text-primary { color: #F8F8F8 !important; }
-  .text-secondary { color: #F8F8F8 !important; }
-  .text-foreground { color: #F8F8F8 !important; }
 }
 
 /* ==========================

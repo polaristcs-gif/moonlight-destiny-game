@@ -46,10 +46,10 @@ export function StatsModal({ isOpen, onClose }: StatsModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50 p-4"
+            className="fixed inset-0 flex items-center justify-center z-50 p-4"
           >
             {/* DARK GLASS CONTAINER */}
-            <div className="bg-[#120B1E]/90 backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(139,92,246,0.2)] p-6 space-y-6 border border-white/10">
+            <div className="w-full max-w-md bg-[#120B1E]/90 backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(139,92,246,0.2)] p-6 space-y-6 border border-purple-500/30">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-purple-300" />

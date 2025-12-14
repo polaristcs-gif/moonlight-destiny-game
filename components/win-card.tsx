@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Sparkles, Send, Moon, Star, Instagram, Facebook, Twitter, MessageCircle } from "lucide-react"
+import { Sparkles, Send, Moon, Star, Instagram, Facebook, Twitter, MessageCircle, Copy, Check } from "lucide-react"
 import { useState } from "react"
 import { getRandomMessage } from "@/lib/mystical-messages"
 import { socialShare } from "@/lib/social-share"
@@ -73,6 +73,19 @@ export function WinCard({ code, onReset }: WinCardProps) {
       return "The stars align in your favor"
     }
   })
+
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      toast.success("Code copied!")
+      setTimeout(() => setCopied(false), 2000)
+    } catch (e) {
+      console.error("Copy failed", e)
+    }
+  }
 
   const handleSocialShare = (platform: "instagram" | "facebook" | "twitter" | "whatsapp") => {
     analytics.track("share_clicked", { platform })
@@ -148,9 +161,22 @@ export function WinCard({ code, onReset }: WinCardProps) {
              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
             
             <p className="font-serif text-xs text-purple-300 mb-3 tracking-[0.3em] uppercase">Your Mystical Code</p>
-            <p className="font-mono text-4xl md:text-5xl font-bold text-white tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] select-all">
-                {code}
-            </p>
+            <div className="flex items-center justify-center gap-3">
+              <p className="font-mono text-4xl md:text-5xl font-bold text-white tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] select-all">
+                  {code}
+              </p>
+              <button
+                onClick={handleCopyCode}
+                className="p-2 rounded-lg bg-purple-500/20 hover:bg-purple-500/40 border border-purple-400/30 transition-all"
+                title="Copy code"
+              >
+                {copied ? (
+                  <Check className="w-5 h-5 text-green-400" />
+                ) : (
+                  <Copy className="w-5 h-5 text-purple-300" />
+                )}
+              </button>
+            </div>
           </motion.div>
 
           {/* ACTIONS */}

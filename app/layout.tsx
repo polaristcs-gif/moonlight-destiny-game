@@ -1,17 +1,17 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google"
+import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { ToastContainer } from "@/components/toast"
 import { OfflineDetector } from "@/components/offline-detector"
-import "./globals_НОВЫЙ_ОРИГИНАЛЬНЫЙ.css"
+import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
-const _playfair = Playfair_Display({
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
 })
 
 export const metadata: Metadata = {
@@ -52,7 +52,6 @@ export const metadata: Metadata = {
     initialScale: 1,
     maximumScale: 5,
     userScalable: true,
-    themeColor: "#C9B5D9",
   },
   icons: {
     icon: [
@@ -83,7 +82,7 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="font-sans antialiased">
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <ErrorBoundary>
           <OfflineDetector />
           {children}
