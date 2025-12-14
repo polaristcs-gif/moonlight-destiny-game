@@ -20,14 +20,14 @@ export default function MoonlightDestiny() {
   const [showStats, setShowStats] = useState(false)
   const [stars, setStars] = useState<Array<{id: number, size: number, top: number, left: number, opacity: number}>>([])
 
-  // Генерируем звёзды только на клиенте
+  // Генерируем звёзды только на клиенте - крупнее и ярче
   useEffect(() => {
-    const generatedStars = [...Array(25)].map((_, i) => ({
+    const generatedStars = [...Array(35)].map((_, i) => ({
       id: i,
-      size: Math.random() * 2 + 0.5,
+      size: Math.random() * 3 + 1.5,
       top: Math.random() * 100,
       left: Math.random() * 100,
-      opacity: Math.random() * 0.5 + 0.3
+      opacity: Math.random() * 0.4 + 0.6
     }))
     setStars(generatedStars)
   }, [])
@@ -155,9 +155,9 @@ export default function MoonlightDestiny() {
         }} />
       </div>
 
-      {/* ЗВЕЗДЫ - статичные для производительности */}
+      {/* ЗВЕЗДЫ - z-index выше фона */}
       {stars.length > 0 && (
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="fixed inset-0 z-[1] pointer-events-none">
           {stars.map((star) => (
             <div
               key={star.id}
