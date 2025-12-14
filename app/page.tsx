@@ -118,39 +118,15 @@ export default function MoonlightDestiny() {
         }
       `}</style>
 
-      {/* ФОН - ГЛУБОКИЙ КОСМОС + ЯРКИЕ ТУМАННОСТИ */}
+      {/* ФОН - статичный на мобильных, анимированный на десктопе */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Базовый градиент - очень темный */}
+        {/* Базовый градиент */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#08050f] via-[#0d0818] via-[#100a1a] to-[#08050d]" />
         
-        {/* Яркие туманности на темном фоне */}
-        <motion.div 
-          animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0.75, 0.5], x: [0, 40, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[-25%] left-[-20%] w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] rounded-full bg-purple-500/60 blur-[100px] sm:blur-[140px]" 
-        />
-        <motion.div 
-          animate={{ scale: [1.3, 0.9, 1.3], opacity: [0.4, 0.65, 0.4], y: [0, -50, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-[5%] right-[-25%] w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] rounded-full bg-fuchsia-400/50 blur-[90px] sm:blur-[120px]" 
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.5, 1], opacity: [0.45, 0.7, 0.45], x: [0, -30, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-          className="absolute bottom-[-20%] left-[0%] w-[420px] h-[420px] sm:w-[600px] sm:h-[600px] rounded-full bg-violet-400/55 blur-[95px] sm:blur-[130px]" 
-        />
-        <motion.div 
-          animate={{ scale: [0.85, 1.25, 0.85], opacity: [0.3, 0.55, 0.3] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 8 }}
-          className="absolute top-[45%] right-[5%] w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] rounded-full bg-pink-400/40 blur-[70px] sm:blur-[100px]" 
-        />
-        
-        {/* Центральное свечение - ярче */}
-        <motion.div 
-          animate={{ opacity: [0.15, 0.35, 0.15], scale: [1, 1.15, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[25%] left-[50%] -translate-x-1/2 w-[700px] h-[500px] rounded-full bg-purple-400/25 blur-[100px]" 
-        />
+        {/* Туманности - статичные на мобильных */}
+        <div className="absolute top-[-25%] left-[-20%] w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] rounded-full bg-purple-500/60 blur-[80px] sm:blur-[140px]" />
+        <div className="absolute top-[5%] right-[-25%] w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] rounded-full bg-fuchsia-400/50 blur-[70px] sm:blur-[120px]" />
+        <div className="absolute bottom-[-20%] left-[0%] w-[420px] h-[420px] sm:w-[600px] sm:h-[600px] rounded-full bg-violet-400/55 blur-[75px] sm:blur-[130px]" />
         
         {/* Сетка киберпанк */}
         <div className="absolute inset-0 opacity-[0.025]" style={{
@@ -159,9 +135,9 @@ export default function MoonlightDestiny() {
         }} />
       </div>
 
-      {/* ЗВЕЗДЫ - только десктоп (hidden на мобильных для производительности) */}
+      {/* ЗВЕЗДЫ - статичные, без анимации */}
       {stars.length > 0 && (
-        <div className="hidden sm:block fixed inset-0 z-[1] pointer-events-none">
+        <div className="fixed inset-0 z-[1] pointer-events-none">
           {stars.map((star) => (
             <div
               key={star.id}
