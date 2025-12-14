@@ -159,9 +159,9 @@ export default function MoonlightDestiny() {
         }} />
       </div>
 
-      {/* ЗВЕЗДЫ - CSS анимация для кроссбраузерности */}
+      {/* ЗВЕЗДЫ - только десктоп (hidden на мобильных для производительности) */}
       {stars.length > 0 && (
-        <div className="fixed inset-0 z-[1] pointer-events-none">
+        <div className="hidden sm:block fixed inset-0 z-[1] pointer-events-none">
           {stars.map((star) => (
             <div
               key={star.id}
@@ -171,9 +171,8 @@ export default function MoonlightDestiny() {
                 height: `${star.size}px`,
                 top: `${star.top}%`,
                 left: `${star.left}%`,
-                boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, 0.8)`,
-                animation: `star-pulse ${3 + star.delay}s ease-in-out infinite`,
-                animationDelay: `${star.delay}s`
+                opacity: 0.7,
+                boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, 0.6)`
               }}
             />
           ))}
