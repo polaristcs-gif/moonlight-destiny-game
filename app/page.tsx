@@ -18,16 +18,16 @@ export default function MoonlightDestiny() {
   const [winCode, setWinCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [showStats, setShowStats] = useState(false)
-  const [stars, setStars] = useState<Array<{id: number, size: number, top: number, left: number, opacity: number}>>([])
+  const [stars, setStars] = useState<Array<{id: number, size: number, top: number, left: number, delay: number}>>([])
 
-  // Генерируем звёзды только на клиенте - крупнее и ярче
+  // Генерируем звёзды только на клиенте
   useEffect(() => {
-    const generatedStars = [...Array(35)].map((_, i) => ({
+    const generatedStars = [...Array(40)].map((_, i) => ({
       id: i,
-      size: Math.random() * 3 + 1.5,
+      size: Math.random() * 2 + 1,
       top: Math.random() * 100,
       left: Math.random() * 100,
-      opacity: Math.random() * 0.4 + 0.6
+      delay: Math.random() * 3
     }))
     setStars(generatedStars)
   }, [])
@@ -112,6 +112,10 @@ export default function MoonlightDestiny() {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
         }
+        @keyframes star-pulse {
+          0%, 100% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.3); }
+        }
       `}</style>
 
       {/* ФОН - ГЛУБОКИЙ КОСМОС + ЯРКИЕ ТУМАННОСТИ */}
@@ -155,7 +159,7 @@ export default function MoonlightDestiny() {
         }} />
       </div>
 
-      {/* ЗВЕЗДЫ - z-index выше фона */}
+      {/* ЗВЕЗДЫ - CSS анимация для кроссбраузерности */}
       {stars.length > 0 && (
         <div className="fixed inset-0 z-[1] pointer-events-none">
           {stars.map((star) => (
@@ -167,8 +171,9 @@ export default function MoonlightDestiny() {
                 height: `${star.size}px`,
                 top: `${star.top}%`,
                 left: `${star.left}%`,
-                opacity: star.opacity,
-                boxShadow: `0 0 ${star.size * 3}px rgba(255, 255, 255, 0.5)`
+                boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, 0.8)`,
+                animation: `star-pulse ${3 + star.delay}s ease-in-out infinite`,
+                animationDelay: `${star.delay}s`
               }}
             />
           ))}
