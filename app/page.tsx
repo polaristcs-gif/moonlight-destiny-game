@@ -20,16 +20,15 @@ export default function MoonlightDestiny() {
   const [showStats, setShowStats] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  // Генерируем звёзды только на клиенте чтобы избежать hydration mismatch
+  // Генерируем звёзды только на клиенте - статичные для производительности
   const stars = useMemo(() => {
     if (typeof window === 'undefined') return []
-    return [...Array(40)].map((_, i) => ({
+    return [...Array(25)].map((_, i) => ({
       id: i,
-      size: Math.random() * 2.5 + 1,
+      size: Math.random() * 2 + 0.5,
       top: Math.random() * 100,
       left: Math.random() * 100,
-      duration: Math.random() * 4 + 3,
-      delay: Math.random() * 3
+      opacity: Math.random() * 0.5 + 0.3
     }))
   }, [mounted])
 
@@ -160,11 +159,11 @@ export default function MoonlightDestiny() {
         }} />
       </div>
 
-      {/* ЗВЕЗДЫ - рендерятся только на клиенте */}
+      {/* ЗВЕЗДЫ - статичные для производительности на мобильных */}
       {mounted && (
         <div className="absolute inset-0 z-0 pointer-events-none">
           {stars.map((star) => (
-            <motion.div
+            <div
               key={star.id}
               className="absolute rounded-full bg-white"
               style={{ 
@@ -172,10 +171,9 @@ export default function MoonlightDestiny() {
                 height: `${star.size}px`,
                 top: `${star.top}%`,
                 left: `${star.left}%`,
-                boxShadow: `0 0 ${star.size * 4}px rgba(255, 255, 255, 0.7)`
+                opacity: star.opacity,
+                boxShadow: `0 0 ${star.size * 3}px rgba(255, 255, 255, 0.5)`
               }}
-              animate={{ opacity: [0.3, 0.8, 0.3], scale: [0.8, 1.2, 0.8] }}
-              transition={{ duration: star.duration, repeat: Infinity, delay: star.delay }}
             />
           ))}
         </div>
